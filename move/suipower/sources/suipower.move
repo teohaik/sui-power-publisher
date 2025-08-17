@@ -1,6 +1,5 @@
 module suipower::suipower;
 
-use std::address;
 use std::string::String;
 use sui::event;
 
