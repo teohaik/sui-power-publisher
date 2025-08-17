@@ -1,2 +1,6 @@
 config.json
 sui_venv
+.env
+node_modules
+plant_stats.json
+stats-example.json

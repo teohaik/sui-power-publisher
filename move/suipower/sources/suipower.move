@@ -2,6 +2,7 @@ module suipower::suipower;
 
 use std::string::String;
 use sui::event;
+use sui::clock::Clock;
 
 public struct MeasurementHourly has copy, drop, store {
     timestamp_ms : u64,
@@ -20,14 +21,14 @@ public struct MeasurementDaily has copy, drop, store {
 }
 
 public fun emit_measurement_hourly (
-     timestamp_ms : u64,
+    clock: &Clock,
     watthours_produced: u64,
     watthours_consumed: u64,
     plant_id: String,
-    ctx: TxContext
+    ctx: &mut TxContext
 ){
     event::emit(MeasurementHourly {
-        timestamp_ms,
+        timestamp_ms : clock.timestamp_ms(),
         producer_account: ctx.sender(),
         watthours_produced,
         watthours_consumed,
@@ -36,14 +37,14 @@ public fun emit_measurement_hourly (
 }
 
 public fun emit_measurement_daily (
-     timestamp_ms : u64,
+    clock: &sui::clock::Clock,
     watthours_produced: u64,
     watthours_consumed: u64,
     plant_id: String,
-    ctx: TxContext
+    ctx: &mut TxContext
 ){
     event::emit(MeasurementDaily {
-        timestamp_ms,
+        timestamp_ms : clock.timestamp_ms(),
         producer_account: ctx.sender(),
         watthours_produced,
         watthours_consumed,

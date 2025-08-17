@@ -8,7 +8,7 @@ def main():
 
     gas = client.get_gas()
 
-    print(gas)
+    print(gas.result_data)
 
 if __name__ == "__main__":
     main()

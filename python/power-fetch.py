@@ -1,6 +1,6 @@
 from fusion_solar_py.client import FusionSolarClient
 import json
-with open("config.json", "r") as config_file:
+with open("../config.json", "r") as config_file:
     config = json.load(config_file)
 
 client = FusionSolarClient(
@@ -9,7 +9,8 @@ client = FusionSolarClient(
     huawei_subdomain=config["huawei_subdomain"]
 )
 
-PLANT_ID="NE=181229449"
+PLANT_ID=config["plant_id"]
+
 
 # get the stats
 stats = client.get_power_status()
@@ -28,9 +29,8 @@ with open("plant_stats.json", "w") as json_file:
 
 print("Plant stats have been saved to plant_stats.json.")
 
-# NOTE: Since an update of the API, this data does no longer seem
-#       to be up-to-date. The most recent data only seems to be
-#       available on th plant level (see below)
 
-# log out - just in case
+
+
+
 client.log_out()
